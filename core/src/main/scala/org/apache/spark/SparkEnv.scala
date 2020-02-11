@@ -175,7 +175,7 @@ object SparkEnv extends Logging {
     create(
       conf,
       SparkContext.DRIVER_IDENTIFIER,
-      bindAddress,
+      null,
       advertiseAddress,
       Option(port),
       isLocal,
@@ -200,7 +200,7 @@ object SparkEnv extends Logging {
     val env = create(
       conf,
       executorId,
-      hostname,
+     null,
       hostname,
       None,
       isLocal,

@@ -40,7 +40,7 @@ private[spark] object RpcEnv {
       conf: SparkConf,
       securityManager: SecurityManager,
       clientMode: Boolean = false): RpcEnv = {
-    create(name, host, host, port, conf, securityManager, 0, clientMode)
+    create(name, null, host, port, conf, securityManager, 0, clientMode)
   }
 
   def create(
