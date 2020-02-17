@@ -1166,7 +1166,10 @@ private[deploy] object Master extends Logging {
       webUiPort: Int,
       conf: SparkConf): (RpcEnv, Int, Option[Int]) = {
     val securityMgr = new SecurityManager(conf)
-    val rpcEnv = RpcEnv.create(SYSTEM_NAME, host, port, conf, securityMgr)
+    // TODO: Configure bindAddress properly
+    // TODO: Are there any issues when binding on a separate address to host param?
+    // TODO: Add createMasterEnv helper to RpcEnv?
+    val rpcEnv = RpcEnv.create(SYSTEM_NAME, "::", host, port, conf, securityMgr, 0, false)
     val masterEndpoint = rpcEnv.setupEndpoint(ENDPOINT_NAME,
       new Master(rpcEnv, rpcEnv.address, webUiPort, securityMgr, conf))
     val portsResponse = masterEndpoint.askSync[BoundPortsResponse](BoundPortsRequest)
